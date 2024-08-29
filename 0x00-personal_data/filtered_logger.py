@@ -34,7 +34,7 @@ def get_logger() -> logging.Logger:
     The logger only logs up to INFO level and does not
     propagate messages.
     """
-    logger = logging.get_logger('user_data')
+    logger = logging.getLlogger('user_data')
     logger.setLevel(logging.INFO)
     logger.propagate = False
 
