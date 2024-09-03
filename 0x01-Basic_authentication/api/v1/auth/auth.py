@@ -17,7 +17,7 @@ class Auth:
             return True
         if excluded_paths is None or len(excluded_paths) == 0:
             return True
-        slahed = True if path[-1] == '/' else False
+        slashed = True if path[-1] == '/' else False
         temp_path = path
         if not slashed:
             temp_path += '/'
@@ -29,7 +29,7 @@ class Auth:
                 if ex_path[:-1] == path[:ex_path_len - 1]:
                     return False
             else:
-                if tmp_path == ex_path:
+                if temp_path == ex_path:
                     return False
         return True
 
