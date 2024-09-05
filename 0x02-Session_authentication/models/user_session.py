@@ -9,7 +9,7 @@ class UserSession(Base):
     """
     User session model
     """
-    def __init__(self, *arg: list, **kwargs: dict):
+    def __init__(self, *args: list, **kwargs: dict):
         """Init"""
         super().__init__(*args, **kwargs)
         self.user_id = kwargs.get('user_id')
