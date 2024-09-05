@@ -2,7 +2,7 @@
 """
 Adds expiration date to Session ID
 """
-from api.auth.session_auth import SessionAuth
+from api.v1.auth.session_auth import SessionAuth
 from os import getenv
 
 
