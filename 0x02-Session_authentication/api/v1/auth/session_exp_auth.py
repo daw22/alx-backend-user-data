@@ -4,6 +4,7 @@ Adds expiration date to Session ID
 """
 from api.v1.auth.session_auth import SessionAuth
 from os import getenv
+from datetime import datetime, timedelta
 
 
 class SessionExpAuth(SessionAuth):
