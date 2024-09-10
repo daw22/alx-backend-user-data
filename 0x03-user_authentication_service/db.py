@@ -6,6 +6,8 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
 
 from user import Base, User
+from sqlalchemy.exc import InvalidRequestError
+from sqlalchemy.orm.exc import NoResultFound
 
 
 class DB:
@@ -38,5 +40,24 @@ class DB:
         user.hashed_password = hashed_password
         self._session.add(user)
         self._session.commit()
+
+        return user
+
+    def find_user_by(self, **kwargs) -> User:
+        """
+        finds a user using the filters provided
+        """
+        column_names = User.__table__.columns.keys()
+
+        if not kwargs:
+            raise InvalidRequestError
+
+        for key, value in kwargs.items():
+            if key not in column_names:
+                raise InvalidRequestError
+        user = self._session.query(User).filter_by(**kwargs).first()
+
+        if user is None:
+            raise NoResultFound
 
         return user
