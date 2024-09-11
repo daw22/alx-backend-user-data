@@ -36,5 +36,28 @@ def register_user():
     return flask.jsonify({"email": email, "message": "user created"})
 
 
+@app.route('/sessions', methods=["POST"], strict_slashes=False)
+def login():
+    """
+    Login route - creates and saves session id
+                - sends back a cookie with session_id
+    """
+    try:
+        email = flask.request.form["email"]
+        password = flask.request.form["password"]
+    except Exception:
+        flask.abort(400)
+
+    if not AUTH.valid_login(email, password):
+        flask.abort(401)
+
+    response = flask.jsonify({"email": email,
+                              "message": "logged in"})
+    session_id = AUTH.create_session(email)
+    response.set_cookie("session_id", session_id)
+
+    return response
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port="5000")
