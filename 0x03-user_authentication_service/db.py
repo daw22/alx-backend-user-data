@@ -60,7 +60,7 @@ class DB:
 
         return user
 
-    def update_user(self, user_id: int, **kwargs):
+    def update_user(self, user_id: int, **kwargs) -> None:
         """
         Updates user attributes
         """
@@ -71,7 +71,8 @@ class DB:
                 raise ValueError
 
         user = self.find_user_by(id=user_id)
-        for key, value in kwargs.items():
-            setattr(user, key, value)
+        if user is not None:
+            for key, value in kwargs.items():
+                setattr(user, key, value)
 
-        self._session.commit()
+            self._session.commit()
