@@ -79,7 +79,7 @@ class Auth:
         return session_id
 
     def get_user_from_session_id(self, session_id: str
-                                 )-> Union[str, None]:
+                                 )-> Union[User, None]:
         """
         Gets and returns  the user object from session id
         """
@@ -91,7 +91,7 @@ class Auth:
         except NoResultFound:
             return None
 
-        return user.email
+        return user
 
     def destroy_session(self, user_id: int) -> None:
         """
