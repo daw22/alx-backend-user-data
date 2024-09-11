@@ -81,7 +81,7 @@ class Auth:
         """
         Gets and returns  the user object from session id
         """
-        if sesssio_id is None:
+        if sesssion_id is None:
             return None
 
         try:
@@ -90,3 +90,15 @@ class Auth:
             return None
 
         return user
+
+    def destroy_session(self, user_id: int) -> None:
+        """
+        Destroys user session - removes session_id
+        value from user object
+        """
+        try:
+            user = self._db.find_user_by(id=user_id)
+        except NoResultFound:
+            return None
+
+        self.db.update_user(id, session_id=None)
