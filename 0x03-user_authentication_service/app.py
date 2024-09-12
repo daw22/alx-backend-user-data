@@ -65,7 +65,7 @@ def logout():
     logout route - finds users, deletes session_id and
     redirects to "GET/"
     """
-    session_id = request.cookies.get('session_id')
+    session_id = request.cookies.get('session_id', None)
 
     if session_id is None:
         flask.abort(403)
